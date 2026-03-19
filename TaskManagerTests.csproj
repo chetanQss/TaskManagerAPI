@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <IsTestProject>true</IsTestProject> 
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TaskManagerAPI.csproj" />
+    <ProjectReference Include="..\TaskManagerAPI\TaskManagerAPI.csproj" />
   </ItemGroup>
 
 </Project>
