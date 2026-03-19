@@ -4,13 +4,15 @@ pipeline {
         IMAGE_NAME="chetan2992/taskmanagerapi"
         IMAGE_TAG="v${env.BUILD_NUMBER}"
     }
+
+    triggers {
+        githubPush()
+    }
+
     stages {
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                git branch: 'main',
-                    changelog: false,
-                    poll: false,
-                    url: 'https://github.com/chetanQss/TaskManagerAPI'
+                checkout scm
             }
         }
         stage('Clean') {
