@@ -32,24 +32,24 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+                bat 'docker build -t %IMAGE_NAME%:%IMAGE_TAG% .'
             }
         }
         stage('Login to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DockerPass', usernameVariable: 'DockerUser')]) {
-                     bat 'docker login -u ${DockerUser} -p ${DockerPass}'
+                     bat 'docker login -u %DockerUser% -p %DockerPass%'
                 }
             }
         }
         stage('Tag Docker Image') {
             steps {
-                bat 'docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest'
+                bat 'docker tag %IMAGE_NAME%:%IMAGE_TAG% %IMAGE_NAME%:latest'
             }
         }
         stage('Push Docker Image') {
             steps {
-                bat 'docker push $IMAGE_NAME:$IMAGE_TAG'
+                bat 'docker push %IMAGE_NAME%:%IMAGE_TAG%'
             }
         }
         stage('Deploy') {
@@ -58,7 +58,7 @@ pipeline {
                 docker ps -a
                 docker stop taskmanagerapi-container || echo "No container to stop"
                 docker rm taskmanagerapi-container || echo "No container to remove"
-                docker run -d -p 5000:80 --name taskmanagerapi-container $IMAGE_NAME:$IMAGE_TAG
+                docker run -d -p 5000:80 --name taskmanagerapi-container %IMAGE_NAME%:%IMAGE_TAG%
                 docker ps
                 '''
             }
