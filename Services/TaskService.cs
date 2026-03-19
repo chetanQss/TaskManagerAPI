@@ -1,4 +1,6 @@
 ﻿using TaskManagerAPI.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TaskManagerAPI.Services
 {
