@@ -6,6 +6,7 @@ namespace TaskManagerAPI.Services
 {
     public class TaskService
     {
+
         private static List<TaskItem> tasks = new List<TaskItem>();
 
         public List<TaskItem> GetAll()
