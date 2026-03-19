@@ -2,7 +2,7 @@
 using TaskManagerAPI.Models;
 using Xunit;
 
-namespace TaskManagerTests
+namespace TaskManagerAPI.TaskManagerTests
 {
     public class TaskTests
     {
