@@ -13,11 +13,23 @@ pipeline {
                     url: 'https://github.com/chetanQss/TaskManagerAPI'
             }
         }
+        stage('Clean') {
+            steps {
+                bat """
+                rmdir /s /q bin
+                rmdir /s /q obj
+                rmdir /s /q publish
+                rmdir /s /q TaskManagerTests\\bin
+                rmdir /s /q TaskManagerTests\\obj
+                dotnet clean TaskManagerAPI.csproj
+                """
+            }
+        }
         stage('Build') {
             steps {
-                bat 'dotnet restore TaskManagerAPI.sln'
-                bat 'dotnet clean TaskManagerAPI.sln'
-                bat 'dotnet build TaskManagerAPI.sln --configuration Release'
+                bat 'dotnet restore TaskManagerAPI.csproj'
+                bat 'dotnet clean TaskManagerAPI.csproj'
+                bat 'dotnet build TaskManagerAPI.csproj -c Release'
             }
         }
         stage('Test') {
